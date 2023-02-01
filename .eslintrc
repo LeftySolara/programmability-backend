@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint/eslint-plugin", "prettier"],
+  "plugins": ["import", "@typescript-eslint/eslint-plugin", "prettier"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -21,12 +21,18 @@
   ],
   "settings": {
     "import/resolver": {
-      "typescript": {}
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
     }
   },
   "rules": {
     "quotes": "off",
     "no-throw-literal": "off",
+    "import/no-unresolved": "error",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/extensions": [
       "error",

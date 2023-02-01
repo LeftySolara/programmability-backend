@@ -1,3 +1,4 @@
+import appConfig from "@utils/appConfig";
 import app from "./app";
 import runLoaders from "./loaders";
 
@@ -5,9 +6,8 @@ import runLoaders from "./loaders";
   await runLoaders(app);
 })();
 
-const PORT = 5000;
-const server = app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}...`);
+const server = app.listen(appConfig.express.serverPort, () => {
+  console.log(`Listening on port ${appConfig.express.serverPort}...`);
 });
 
 const gracefulShutdown = (cause: string) => {
