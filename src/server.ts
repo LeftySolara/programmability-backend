@@ -1,4 +1,5 @@
 import appConfig from "@utils/appConfig";
+import logger from "@utils/logger";
 import app from "./app";
 import runLoaders from "./loaders";
 
@@ -7,13 +8,13 @@ import runLoaders from "./loaders";
 })();
 
 const server = app.listen(appConfig.express.serverPort, () => {
-  console.log(`Listening on port ${appConfig.express.serverPort}...`);
+  logger.info(`Listening on port ${appConfig.express.serverPort}...`);
 });
 
 const gracefulShutdown = (cause: string) => {
-  console.log(`Closing HTTP server due to ${cause}.`);
+  logger.info(`Closing HTTP server due to ${cause}.`);
   server.close(() => {
-    console.log("HTTP server closed.");
+    logger.info("HTTP server closed.");
   });
 };
 
