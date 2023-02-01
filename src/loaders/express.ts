@@ -1,5 +1,6 @@
 import { Application } from "express";
 import bodyParser, { urlencoded } from "body-parser";
+import appConfig from "@utils/appConfig";
 
 const loadExpress = async ({ app }: { app: Application }) => {
   app.use(bodyParser.json());
@@ -9,7 +10,7 @@ const loadExpress = async ({ app }: { app: Application }) => {
   app.use((req, res, next) => {
     res.setHeader(
       "Access-Control-Allow-Origin",
-      process.env.CORS_ORIGIN as string,
+      appConfig.express.corsOrigin as string,
     );
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader(
