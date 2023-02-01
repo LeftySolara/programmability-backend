@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc && tsc-alias",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node dist/server.js",
     "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register ./src/server.ts",
     "prod": "NODE_ENV=production ts-node -r tsconfig-paths/register ./src/server.ts",
     "test": "NODE_ENV=test jest --coverage --verbose",
