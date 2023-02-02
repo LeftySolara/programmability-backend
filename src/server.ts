@@ -8,11 +8,15 @@ import runLoaders from "./loaders";
 })();
 
 const server = app.listen(appConfig.express.serverPort, () => {
-  logger.info(`Listening on port ${appConfig.express.serverPort}...`);
+  logger.info(
+    { port: appConfig.express.serverPort },
+    "Listening on port %s...",
+    appConfig.express.serverPort,
+  );
 });
 
 const gracefulShutdown = (cause: string) => {
-  logger.info(`Closing HTTP server due to ${cause}.`);
+  logger.info({ cause }, "Closing HTTP server due to %s.", cause);
   server.close(() => {
     logger.info("HTTP server closed.");
   });
