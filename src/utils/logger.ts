@@ -19,6 +19,16 @@ const transport = pino.transport({
 const logger = pino(
   {
     level: appConfig.logger.logLevel as string,
+    redact: [
+      "email",
+      "password",
+      "passwordConfirmation",
+      "confirmPassword",
+      "name",
+      "firstName",
+      "lastName",
+      "username",
+    ],
   },
   transport,
 );
