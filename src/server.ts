@@ -1,4 +1,5 @@
 import appConfig from "@utils/appConfig";
+import logger from "@utils/logger";
 import app from "./app";
 import runLoaders from "./loaders";
 
@@ -7,15 +8,29 @@ import runLoaders from "./loaders";
 })();
 
 const server = app.listen(appConfig.express.serverPort, () => {
-  console.log(`Listening on port ${appConfig.express.serverPort}...`);
+  logger.info(
+    { port: appConfig.express.serverPort },
+    "Listening on port %s...",
+    appConfig.express.serverPort,
+  );
 });
 
 const gracefulShutdown = (cause: string) => {
-  console.log(`Closing HTTP server due to ${cause}.`);
+  logger.info({ cause }, "Closing HTTP server due to %s.", cause);
   server.close(() => {
-    console.log("HTTP server closed.");
+    logger.info("HTTP server closed.");
   });
 };
+
+process.on("uncaughtException", (err) => {
+  logger.error(err);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (err) => {
+  logger.error(err);
+  process.exit(1);
+});
 
 process.on("SIGTERM", () => gracefulShutdown("app termination"));
 process.on("SIGUSR2", () => gracefulShutdown("ts-node restart"));

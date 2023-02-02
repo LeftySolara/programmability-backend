@@ -5,6 +5,10 @@ export interface IAppConfig {
     serverPort: string | undefined;
     corsOrigin: string | undefined;
   };
+  logger: {
+    logLevel: string | undefined;
+    logLocation: string | undefined;
+  };
 }
 
 /* Load environment variables. If we're not running in a production environment, then
@@ -23,6 +27,10 @@ const appConfig: IAppConfig = {
   express: {
     serverPort: process.env.SERVER_PORT,
     corsOrigin: process.env.CORS_ORIGIN,
+  },
+  logger: {
+    logLevel: process.env.LOG_LEVEL,
+    logLocation: process.env.LOG_LOCATION,
   },
 };
 
