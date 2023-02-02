@@ -7,6 +7,7 @@ export interface IAppConfig {
   };
   logger: {
     logLevel: string | undefined;
+    logLocation: string | undefined;
   };
 }
 
@@ -29,6 +30,7 @@ const appConfig: IAppConfig = {
   },
   logger: {
     logLevel: process.env.LOG_LEVEL,
+    logLocation: process.env.LOG_LOCATION,
   },
 };
 
