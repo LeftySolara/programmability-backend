@@ -1,4 +1,5 @@
 import appConfig from "@utils/appConfig";
+import ErrorHandler from "@utils/errors/errorHandler";
 import logger from "@utils/logger";
 import app from "./app";
 import runLoaders from "./loaders";
@@ -24,12 +25,12 @@ const gracefulShutdown = (cause: string) => {
 
 process.on("uncaughtException", (err) => {
   logger.error(err);
-  process.exit(1);
+  ErrorHandler.handleError(err, null);
 });
 
 process.on("unhandledRejection", (err) => {
   logger.error(err);
-  process.exit(1);
+  ErrorHandler.handleError(err as Error, null);
 });
 
 process.on("SIGTERM", () => gracefulShutdown("app termination"));
