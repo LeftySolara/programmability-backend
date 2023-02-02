@@ -1,22 +1,26 @@
 import pino from "pino";
 import appConfig from "./appConfig";
 
-const streams = [
-  { stream: process.stdout },
-  {
-    stream: pino.destination({
-      dest: appConfig.logger.logLocation,
-      minLength: 4096,
-      sync: false,
-    }),
-  },
-];
+const transport = pino.transport({
+  targets: [
+    {
+      target: "pino/file",
+      options: { destination: appConfig.logger.logLocation, mkdir: true },
+      level: "info",
+    },
+    {
+      target: "pino/file",
+      options: { destination: 1 },
+      level: "trace",
+    },
+  ],
+});
 
 const logger = pino(
   {
     level: appConfig.logger.logLevel as string,
   },
-  pino.multistream(streams),
+  transport,
 );
 
 export default logger;
