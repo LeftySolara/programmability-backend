@@ -4,6 +4,7 @@ import appConfig from "@utils/appConfig";
 import logger from "@utils/logger";
 import AppError from "@utils/errors/appError";
 import ErrorHandler from "@utils/errors/errorHandler";
+import { commonHttpErrors } from "@utils/errors/errorTypes";
 import pinoHTTP from "pino-http";
 
 const loadExpress = async ({ app }: { app: Application }) => {
@@ -35,7 +36,7 @@ const loadExpress = async ({ app }: { app: Application }) => {
   );
 
   app.get("/", (req, res) => {
-    res.send("Hello World!");
+    return res.status(commonHttpErrors.ok).json("Hello World!");
   });
 
   return app;
