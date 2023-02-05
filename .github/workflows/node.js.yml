@@ -27,7 +27,7 @@ jobs:
 
     services:
       mariadb:
-        image: mariadb-latest
+        image: mariadb:latest
         ports:
           - 3306
         env:
