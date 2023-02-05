@@ -9,6 +9,14 @@ export interface IAppConfig {
     logLevel: string | undefined;
     logLocation: string | undefined;
   };
+  database: {
+    name: string;
+    user: string;
+    password: string;
+    host: string;
+    port: number;
+    dialect: string;
+  };
 }
 
 /* Load environment variables. If we're not running in a production environment, then
@@ -31,6 +39,14 @@ const appConfig: IAppConfig = {
   logger: {
     logLevel: process.env.LOG_LEVEL,
     logLocation: process.env.LOG_LOCATION,
+  },
+  database: {
+    name: process.env.DATABASE_NAME as string,
+    user: process.env.DATABASE_USER as string,
+    password: process.env.DATABASE_PASSWORD as string,
+    host: process.env.DATABASE_HOST as string,
+    port: parseInt(process.env.DATABASE_PORT as string, 10),
+    dialect: process.env.DATABASE_DIALECT as string,
   },
 };
 
